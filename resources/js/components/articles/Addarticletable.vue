@@ -1,22 +1,28 @@
 <template>
-     
-     <button type="button" class="btn btn-success rounded-circle btn-sm"  @click="visible = true">
-        <span style="color: white">
-    
-    
-    Nouveau
-  </span>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-warning   rounded-circle"  @click="visible = true">
+            <span style="color: rgb(43, 27, 27)">
+            <i class="fa-solid fa-square-plus"> </i> 
+          </span>
+          New
+            </button>
+           
 
-    </button>    
-    <h4 align="center">Ajout Article</h4>
+         
+        </div>
+</nav>
+   
 
 <form >
-    <div class="card flex justify-content-center">
-      
-      <Dialog
+  <Dialog
           v-model:visible="visible"
+          modal header="Header" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
          
       >
+    <div class="card flex justify-content-center">
+      
+      
 
     <div class="row">
     <div class="col-md-6">.
@@ -84,10 +90,10 @@ v-bind:files="myFiles"
             </button>
             
             
-        </Dialog>
+       
     </div>
 
-     
+  </Dialog>
           </form>
           
            
@@ -95,7 +101,7 @@ v-bind:files="myFiles"
 
 <script setup>
 import { ref,onMounted } from "vue"
-
+import api from '../config/api.js';
 import vueFilePond from 'vue-filepond';
 import 'filepond/dist/filepond.min.css';
 import Dialog from 'primevue/dialog';
@@ -107,7 +113,8 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 const FilePond = vueFilePond(FilePondPluginImagePreview);
 const myFiles = ref([]);
 
-import axios from 'axios';
+
+import axios from "axios";
 const visible = ref(false);
 const article=ref({
     reference:"",
@@ -121,7 +128,7 @@ const article=ref({
 const Scategories = ref([]);
 const getscategories=()=>{
           
-          axios.get('http://localhost:8000/api/scategories').then(res => {
+          api.get('/api/scategories').then(res => {
               Scategories.value = res.data;
                   }).catch(error => {
                       console.log(error)
@@ -131,9 +138,10 @@ const getscategories=()=>{
       
 const addArticle=async()=>{
   try {
-    await axios.post("http://localhost:8000/api/articles/",article.value)
-   { visible.value=false
-    //window.location.reload()
+    await api.post("/api/articles/",article.value)
+   {
+     visible.value=false
+    window.location.reload()
    }
   } catch (error) {
     

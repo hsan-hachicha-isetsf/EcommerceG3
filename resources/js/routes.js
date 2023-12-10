@@ -3,6 +3,13 @@ import Viewcategorie from "./components/categories/Viewcategorie.vue"
 import Addcategorie from "./components/categories/Addcategorie.vue"
 import Addaticle from "./components/articles/addarticle.vue"
 import Viwearticletable from "./components/articles/Viwearticletable.vue"
+import Editarticle from "./components/articles/Editarticle.vue"
+import Cardarticle from "./components/client/Cardarticle.vue"
+import HomeCart from './components/cart/HomeCart.vue';
+import Cart from './components/cart/Cart.vue';
+import Payment from './components/cart/Payment.vue';
+import Success from './components/cart/Success.vue';
+import Errorpage from './components/cart/Errorpage.vue'
 export const routes=[
   
     {
@@ -29,5 +36,42 @@ export const routes=[
         name:"Viewarticletable",
         path:"/articletable",
         component:Viwearticletable
-    }
+    },
+    {
+        name:"editarticle",
+        path:"/editarticle/:id",
+        component:Editarticle
+    },
+    {
+        name:"cardarticle",
+        path:"/cardarticle",
+        component:Cardarticle
+    },
+    {
+        path:'/shopping',
+        name:'HomeCart',
+        component:HomeCart
+    },
+    {
+        path:'/cart',
+        name:'Cart',
+        component:Cart
+    },
+    {
+        path:'/payment',
+        name:'Payment',
+        component:Payment
+    },
+    {
+        path:'/success',
+        name:'success',
+        component:Success
+    },
+    {
+        path:'/error',
+        name:'Error',
+        component:Errorpage
+    },
+
+
 ]

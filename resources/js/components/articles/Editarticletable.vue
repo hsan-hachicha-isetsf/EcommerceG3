@@ -1,23 +1,17 @@
 <template>
      
-    <button type="button" class="btn btn-success rounded-circle btn-sm"  @click="visible = true">
-       <span style="color: white">
-   
-   
-   Edit
- </span>
+    <button type="button" class="btn btn-warning rounded-circle "  @click="visible = true">
+       <span style="color: rgb(233, 240, 241)">
+        <i class="fa-solid fa-pen-to-square"></i>
+      
+       </span>
 
    </button>    
-   
-
 <form >
    <div class="card flex justify-content-center">
-     
-     <Dialog
-         v-model:visible="visible"
-        
+      <Dialog
+         v-model:visible="visible"   
      >
-
    <div class="row">
    <div class="col-md-6">.
        <label for="reference" class="form-label">Référence</label>
@@ -67,73 +61,48 @@ label-idle="Drop files here..."
 allow-multiple="false"
 accepted-file-types="image/jpeg, image/png"
 v-bind:files="myFiles"
-
 v-on:init="handleFilePondInit"
 :server="serverOptions()"
 />
-   
- </div>
+</div>
  <br/>
-        
-          
- <button type="submit" className="btn btn-outline-primary" @click="modifierproduit">
+<button type="submit" className="btn btn-outline-primary" @click="modifierproduit">
    <i class="fa-solid fa-floppy-disk"></i>Enregister
            </button>
            <button type="button" className="btn btn-outline-primary" @click="cancel">
    <i class="fa-solid fa-floppy-disk"></i>cancel
            </button>
-           
-           
-       </Dialog>
+  </Dialog>
    </div>
-
-    
-         </form>
-         
-          
+  </form>        
 </template>
 
 <script setup>
+import api from '../config/api.js';
 import { ref,onMounted } from "vue"
-
 import vueFilePond from 'vue-filepond';
 import 'filepond/dist/filepond.min.css';
 import Dialog from 'primevue/dialog';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
-
 // Create FilePond component
 const FilePond = vueFilePond(FilePondPluginImagePreview);
 const myFiles = ref([]);
-
 import axios from 'axios';
 const props=defineProps(['art'])
 const visible = ref(false);
-const article=ref({
-   reference:"",
-   designation:"",
-   marque:"",
-   qtestock:0,
-   prix:0,
-   imageart:"/img/img1",
-   scategorieID:""
-})
+const article=ref({})
+  
 const Scategories = ref([]);
-const getscategories=()=>{
-         
-         axios.get('http://localhost:8000/api/scategories').then(res => {
+const getscategories=async()=>{     
+         await api.get('/api/scategories').then(res => {
              Scategories.value = res.data;
                  }).catch(error => {
                      console.log(error)
                  });
      
               }
-     
-
-
 const handleFilePondInit = async() => {
-     
      if (article.value.imageart) {
      
        myFiles.value = [
@@ -146,7 +115,7 @@ const handleFilePondInit = async() => {
      }
    
 const loadarticle=()=>{
-    console.log(props.art)
+   
     article.value=props.art
 }
 onMounted(() => {
@@ -157,8 +126,7 @@ onMounted(() => {
 );
 
 const  modifierproduit=()=>{
-     
-     axios.put(`/api/articles/${article.value.id}`,article.value)
+     api.put(`/api/articles/${article.value.id}`,article.value)
           .then(() => {
             visible.value=false
           })  

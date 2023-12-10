@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div class="drag">
         <div v-if="isLoading">
             <h2> Loading .... </h2>
         </div>
@@ -39,9 +39,13 @@
                       <td>{{ art.qtestock }}</td>
                       <td>{{ art.prix }}</td>
                       
-                      <td><button class="btn btn-outline-primary mx-2">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Edit</button></td>
+                      <td>
+
+                        <router-link :to="{name: 'editarticle', params: { id: art.id }}" class="btn btn-outline-warning mx-2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Modifier</router-link>
+
+                      </td>
                       <td><button class="btn btn-outline-danger mx-2" @click="deletearticle(art.id)">
                         <i class="fa-solid fa-trash-can"></i>
                         Delete
@@ -90,6 +94,8 @@ await axios.delete(`http://localhost:8000/api/articles/${id}`)
 
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.drag{
+  margin-top: 60px;
+}
 </style>
