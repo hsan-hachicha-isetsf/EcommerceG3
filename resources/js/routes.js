@@ -10,6 +10,9 @@ import Cart from './components/cart/Cart.vue';
 import Payment from './components/cart/Payment.vue';
 import Success from './components/cart/Success.vue';
 import Errorpage from './components/cart/Errorpage.vue'
+import Login from './components/authentification/Login.vue'
+import Register from './components/authentification/Register.vue'
+import Dashboard from './components/admin/dashboard.vue'
 export const routes=[
   
     {
@@ -35,7 +38,8 @@ export const routes=[
     {
         name:"Viewarticletable",
         path:"/articletable",
-        component:Viwearticletable
+        component:Viwearticletable,
+        meta:{isAuth:true}
     },
     {
         name:"editarticle",
@@ -72,6 +76,22 @@ export const routes=[
         name:'Error',
         component:Errorpage
     },
-
+    {
+        name: "login",
+        path: "/login",
+        component: Login,
+       
+        },
+        {
+        name: "register",
+        path: "/register",
+        component: Register,
+       
+        },
+        {
+        name: "dashboard",
+        path: '/dashboard',
+        component: Dashboard,
+        }
 
 ]

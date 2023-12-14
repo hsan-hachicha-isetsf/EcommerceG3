@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import { routes } from "./routes";
 import "@fortawesome/fontawesome-free/css/all.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -9,7 +9,7 @@ import 'primevue/resources/themes/lara-light-green/theme.css'
 import store from "./store"
 let app = createApp(App)
 const router = createRouter({
-history: createWebHistory(),
+history: createWebHashHistory(),
 routes: routes,
 })
 app.use(router);

@@ -6,6 +6,8 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ScategorieController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,7 +32,7 @@ Route::middleware('api')->group(function () {
     Route::get('/scat/{idcat}',[ScategorieController::class,'showSCategorieByCAT']);
 
 
-    Route::middleware('api')->group(function () {
+    Route::middleware('api')->middleware('auth:sanctum')->group(function () {
         Route::resource('articles', ArticleController::class);
         });
 
@@ -42,3 +44,6 @@ Route::middleware('api')->group(function () {
         
         
 
+        Route::post('/login', [LoginController::class, 'login']);
+        Route::post('/register', [RegisterController::class, 'register']);
+        Route::middleware('auth:sanctum')->post('/logout', [LoginController::class,'logout']);

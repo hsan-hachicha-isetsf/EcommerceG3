@@ -57,8 +57,8 @@
       // Envoie le token au serveur pour traiter le paiement
       const response = await api.post('/api/createpayment', {
         token: token.id,
-        amount: amount.value * 100, // Convertir le montant en cents 
-        email:email.value
+        amount: amount.value * 100// Convertir le montant en cents 
+        
       });
   
       if (response.data.message) {

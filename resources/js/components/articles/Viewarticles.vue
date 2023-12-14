@@ -65,8 +65,15 @@ import { ref,onMounted } from 'vue';
 import axios from 'axios';
 const articles=ref([])
 const isLoading=ref(true)
+let token=""
+token=localStorage.getItem('token')
+const config = {
+  headers: { Authorization: `Bearer ${token}` }
+};
+
+
 const getarticles=async()=>{
-await axios.get("http://localhost:8000/api/articles")
+await axios.get("http://localhost:8000/api/articles",config)
 .then(res=>{
     articles.value=res.data
     isLoading.value=false

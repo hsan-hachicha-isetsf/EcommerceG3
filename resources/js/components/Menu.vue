@@ -32,6 +32,17 @@
           <router-link class="nav-link active"  to="/articletable">Articles table
             </router-link>
         </li>
+        <li class="nav-item">
+ <router-link class="nav-link active" to="/login">Login
+ </router-link>
+ </li>
+ <li class="nav-item">
+ <router-link class="nav-link active" to="/register">Register
+ </router-link>
+ </li>
+ <li class="nav-item">
+ <button @click="logout">Logout</button>
+ </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
@@ -66,8 +77,26 @@
 
 <script setup>
 
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const logout=async()=> {
+let token=""
+ token=localStorage.getItem('token')
+ console.log(token)
+ axios.post('http://localhost:8000/api/logout', null, {
+ headers: {
+ 'Authorization': `Bearer ${token}`
+ }
+})
+ .then((response) => {
+ console.log(response)
+ localStorage.removeItem('token')
+ localStorage.removeItem('user')
+ router.push("/login")
+ })
+ .catch(err => {console.log(err);alert(err) })
+ }
+
 </script>
 
-<style lang="scss" scoped>
-
-</style>

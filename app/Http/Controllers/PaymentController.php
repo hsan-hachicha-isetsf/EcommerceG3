@@ -24,8 +24,8 @@ class PaymentController extends Controller
                 'amount' => $request->input('amount'), // Le montant à payer en cents (100 = 1 dollar)
                 'currency' => 'usd', // La devise
                 'source' =>  $request->input('token'), //Le token Stripe de la carte de crédit
-                'description' => 'Paiement via Stripe', // Description facultative
-                'receipt_email'=>$request->input('email') // L'adresse e-mail à laquelle envoyer un reçu de paiement.
+                'description' => 'Paiement via Stripe' // Description facultative
+               
                 
 ]);
         // Le paiement a réussi
