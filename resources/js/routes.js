@@ -12,7 +12,7 @@ import Success from './components/cart/Success.vue';
 import Errorpage from './components/cart/Errorpage.vue'
 import Login from './components/authentification/Login.vue'
 import Register from './components/authentification/Register.vue'
-import Dashboard from './components/admin/dashboard.vue'
+import Menu from "./components/Menu.vue"
 export const routes=[
   
     {
@@ -78,7 +78,7 @@ export const routes=[
     },
     {
         name: "login",
-        path: "/login",
+        path: "/",
         component: Login,
        
         },
@@ -88,10 +88,11 @@ export const routes=[
         component: Register,
        
         },
+       
         {
-        name: "dashboard",
-        path: '/dashboard',
-        component: Dashboard,
-        }
+            name: "menu",
+            path: '/menu',
+            component: Menu,
+            }
 
 ]

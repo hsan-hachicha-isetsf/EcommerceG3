@@ -70,8 +70,6 @@ token=localStorage.getItem('token')
 const config = {
   headers: { Authorization: `Bearer ${token}` }
 };
-
-
 const getarticles=async()=>{
 await axios.get("http://localhost:8000/api/articles",config)
 .then(res=>{

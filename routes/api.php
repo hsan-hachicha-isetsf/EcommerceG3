@@ -22,7 +22,7 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('api')->group(function () {
+Route::middleware('api')->middleware('auth:sanctum')->group(function () {
     Route::resource('categories', CategorieController::class);
     });
 

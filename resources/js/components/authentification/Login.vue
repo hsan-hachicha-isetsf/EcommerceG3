@@ -43,7 +43,7 @@
     const handleLogin=async()=> {
     axios.post('http://localhost:8000/api/login/', user).then((response) => {
  console.log(response)
- router.push("/dashboard")
+ router.push("/menu")
  localStorage.setItem('user',response.data.user.name) 
  localStorage.setItem('token',response.data.token) })
  .catch(err => {console.log(err);
